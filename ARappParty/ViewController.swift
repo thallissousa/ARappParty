@@ -1,74 +1,79 @@
 //
 //  ViewController.swift
-//  ARappParty
+//  ARApp
 //
 //  Created by Thallis Sousa on 02/06/22.
 //
 
 import UIKit
-import SceneKit
 import ARKit
+import SceneKit
 
 class ViewController: UIViewController, ARSCNViewDelegate {
+    
 
     @IBOutlet var sceneView: ARSCNView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set the view's delegate
+        
         sceneView.delegate = self
         
-        // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
         
-        // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        guard ARFaceTrackingConfiguration.isSupported
+        else {
+            fatalError("Dispositivo não suportado.")
+        }
         
-        // Set the scene to the view
-        sceneView.scene = scene
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Create a session configuration
-        let configuration = ARWorldTrackingConfiguration()
-
-        // Run the view's session
+        let configuration = ARFaceTrackingConfiguration()
+        
         sceneView.session.run(configuration)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        // Pause the view's session
         sceneView.session.pause()
     }
-
-    // MARK: - ARSCNViewDelegate
     
-/*
-    // Override to create and configure nodes for anchors added to the view's session.
+    //Renderizar a região do rosto com os nós
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
-     
-        return node
+        if let device = sceneView.device {
+            let faceMeshGeometry = ARSCNFaceGeometry(device: device)
+            let node = SCNNode(geometry: faceMeshGeometry)
+            node.geometry?.firstMaterial?.fillMode = .lines
+            node.geometry?.firstMaterial?.transparency = 0.0
+            
+            //adicionar um node com imagem acima do node ja existe
+            let image = UIImage(named: "caipiraHat")
+            let hat = SCNNode(geometry: SCNPlane(width: 0.2, height: 0.1))
+            hat.geometry?.firstMaterial?.diffuse.contents = image
+            hat.position = SCNVector3(x: 0.0, y: 0.13, z: 0.0)
+            node.addChildNode(hat)
+            
+            let image2 = UIImage(named: "fogueirinha")
+            let fogueirinha = SCNNode(geometry: SCNPlane(width: 0.1, height: 0.08))
+            fogueirinha.geometry?.firstMaterial?.diffuse.contents = image2
+            fogueirinha.position = SCNVector3(x: -0.1, y: -0.3, z: 0.0)
+            node.addChildNode(fogueirinha)
+            
+            return node
+        } else {
+            fatalError("Nenhum dispositivo encontrado.")
+        }
     }
-*/
     
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        // Present an error message to the user
-        
-    }
-    
-    func sessionWasInterrupted(_ session: ARSession) {
-        // Inform the user that the session has been interrupted, for example, by presenting an overlay
-        
-    }
-    
-    func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required
-        
+    //Renderizando e dando update
+    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+        if let faceAnchor = anchor as? ARFaceAnchor, let faceGeometry = node.geometry as? ARSCNFaceGeometry {
+            faceGeometry.update(from: faceAnchor.geometry)
+            }
     }
 }
+
