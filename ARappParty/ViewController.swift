@@ -10,20 +10,26 @@ import ARKit
 import SceneKit
 
 class ViewController: UIViewController, ARSCNViewDelegate {
-    let imageName = "bandeirinha.png"
+    let bandeirinhaScenario = "bandeirinha.png"
+    let fogueirinhaScenario = "fogueirinha"
     let image = UIImage(named: "bandeirinha")
-
-    @IBOutlet var sceneView: ARSCNView!
+    let image2 = UIImage(named: "fogueirinha")
     
+    @IBOutlet var sceneView: ARSCNView!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         let imageView = UIImageView(image: image)
-        imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 200)
+        imageView.frame = CGRect(x: 0, y: 0, width: 329, height: 155)
+        
+        let fogueirinhaImageView = UIImageView(image: image2)
+        fogueirinhaImageView.frame = CGRect(x: 0.03, y: 600, width: 227, height: 191)
+        
         
         self.view.addSubview(imageView)
+        self.view.addSubview(fogueirinhaImageView)
         sceneView.delegate = self
         
         
@@ -31,7 +37,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         else {
             fatalError("Dispositivo não suportado.")
         }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,24 +68,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             hat.position = SCNVector3(x: 0.0, y: 0.13, z: 0.0)
             node.addChildNode(hat)
             
-//            let image2 = UIImage(named: "fogueirinha")
-//            let fogueirinha = SCNNode(geometry: SCNPlane(width: 0.2, height: 0.16))
-//            fogueirinha.geometry?.firstMaterial?.diffuse.contents = image2
-//            fogueirinha.position = SCNVector3(x: -0.00, y: -0.3, z: 0.0)
-//            node.addChildNode(fogueirinha)
-//
-//            let image3 = UIImage(named: "bandeirinha")
-//            let bandeirinhaLeft = SCNNode(geometry: SCNPlane(width: 0.2, height: 0.16))
-//            bandeirinhaLeft.geometry?.firstMaterial?.diffuse.contents = image3
-//            bandeirinhaLeft.position = SCNVector3(x: -0.1, y: 0.25, z: 0.0)
-//            node.addChildNode(bandeirinhaLeft)
-//
-//            let image4 = UIImage(named: "bandeirinha")
-//            let bandeirinhaRight = SCNNode(geometry: SCNPlane(width: 0.2, height: 0.16))
-//            bandeirinhaRight.geometry?.firstMaterial?.diffuse.contents = image4
-//            bandeirinhaRight.position = SCNVector3(x: 0.1, y: 0.25, z: 0.0)
-//            node.addChildNode(bandeirinhaRight)
-//
+            
             return node
         } else {
             fatalError("Nenhum dispositivo encontrado.")
@@ -91,7 +79,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         if let faceAnchor = anchor as? ARFaceAnchor, let faceGeometry = node.geometry as? ARSCNFaceGeometry {
             faceGeometry.update(from: faceAnchor.geometry)
-            }
+        }
     }
 }
 
