@@ -71,12 +71,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             node.geometry?.firstMaterial?.fillMode = .lines
             node.geometry?.firstMaterial?.transparency = 0.0
             
-            sceneView.scene.rootNode.addChildNode(createHat())
             
+            node.addChildNode(createHat())
+            return node
+
         } else {
             fatalError("Nenhum dispositivo encontrado.")
         }
-        return createHat()
     }
     
     //MARK: - Dando update
@@ -88,7 +89,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func  createHat() -> SCNNode {
-        
+
         //adicionar um node com imagem acima do node ja existe
         let hat = SCNNode(geometry: SCNPlane(width: 0.2, height: 0.1))
         hat.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "caipiraHat")
