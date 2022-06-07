@@ -26,9 +26,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet var sceneView: ARSCNView!
 
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
+        sceneView.delegate = self
+        
+
         let bandeirinhaImageView = UIImageView(image: bandeirinhaImage)
         bandeirinhaImageView.frame = CGRect(x: 0, y: 0, width: 329, height: 155)
         
@@ -42,7 +44,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         self.view.addSubview(bandeirinhaImageView)
         self.view.addSubview(fogueirinhaImageView)
-        sceneView.delegate = self
         
         guard ARFaceTrackingConfiguration.isSupported
         else {
@@ -64,12 +65,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.pause()
     }
     
-    var appActive = false {
-        didSet {
-            UIApplication.shared.isIdleTimerDisabled = self.appActive
-        }
-    }
-    
     //MARK: - Renderizar a região do rosto com os nós
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         if let device = sceneView.device {
@@ -78,26 +73,31 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             node.geometry?.firstMaterial?.fillMode = .lines
             node.geometry?.firstMaterial?.transparency = 0.0
             
-            //adicionar um node com imagem acima do node ja existe
-            let image = UIImage(named: "caipiraHat")
-            let hat = SCNNode(geometry: SCNPlane(width: 0.2, height: 0.1))
-            hat.geometry?.firstMaterial?.diffuse.contents = image
-            hat.position = SCNVector3(x: 0.0, y: 0.13, z: 0.0)
-            node.addChildNode(hat)
+            sceneView.scene.rootNode.addChildNode(createHat())
             
-            
-            return node
         } else {
             fatalError("Nenhum dispositivo encontrado.")
         }
+        return createHat()
     }
     
     //MARK: - Dando update
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         if let faceAnchor = anchor as? ARFaceAnchor, let faceGeometry = node.geometry as? ARSCNFaceGeometry {
             faceGeometry.update(from: faceAnchor.geometry)
-
             
         }
     }
+    
+    func  createHat() -> SCNNode {
+        
+        //adicionar um node com imagem acima do node ja existe
+        let hat = SCNNode(geometry: SCNPlane(width: 0.2, height: 0.1))
+        hat.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "caipiraHat")
+        hat.name = "Chapéu de caipira"
+        hat.position = SCNVector3(x: 0.0, y: 0.13, z: 0.0)
+        
+        return hat
+        }
+    
 }
