@@ -7,7 +7,7 @@
 
 import UIKit
 import ARKit
-//import SceneKit
+import SceneKit
 
 class ViewController: UIViewController, ARSCNViewDelegate {
     let bandeirinhaScenario = "bandeirinha.png"
@@ -15,19 +15,24 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     let bandeirinhaImage = UIImage(named: "bandeirinha")
     let fogueirinhaImage = UIImage(named: "fogueirinha")
     
-    var currentFrame: ARFrame?
     
+    @IBAction func takePhotoButton(_ sender: Any) {
+        
+            let image = sceneView.snapshot()
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        
+    }
     
     @IBOutlet var sceneView: ARSCNView!
-    
+
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         let bandeirinhaImageView = UIImageView(image: bandeirinhaImage)
         bandeirinhaImageView.frame = CGRect(x: 0, y: 0, width: 329, height: 155)
-
-
+        
+        
         let bandeirinhaImageView2 = UIImageView(image: bandeirinhaImage)
         bandeirinhaImageView2.frame = CGRect(x: 0, y: 0, width: 329, height: 155)
         
@@ -59,6 +64,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.pause()
     }
     
+    var appActive = false {
+        didSet {
+            UIApplication.shared.isIdleTimerDisabled = self.appActive
+        }
+    }
+    
     //MARK: - Renderizar a região do rosto com os nós
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         if let device = sceneView.device {
@@ -85,13 +96,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         if let faceAnchor = anchor as? ARFaceAnchor, let faceGeometry = node.geometry as? ARSCNFaceGeometry {
             faceGeometry.update(from: faceAnchor.geometry)
+
+            
         }
     }
-    
-    func session(_ session:ARSession, didUpdate frame: ARFrame) {
-        self.currentFrame = frame
-        print("tirou a foto")
-    }
 }
-
-
