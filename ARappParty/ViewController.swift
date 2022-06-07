@@ -12,26 +12,37 @@ import SceneKit
 class ViewController: UIViewController, ARSCNViewDelegate {
     let bandeirinhaScenario = "bandeirinha.png"
     let fogueirinhaScenario = "fogueirinha"
-    let image = UIImage(named: "bandeirinha")
-    let image2 = UIImage(named: "fogueirinha")
+    let bandeirinhaImage = UIImage(named: "bandeirinha")
+    let fogueirinhaImage = UIImage(named: "fogueirinha")
+    
+    
+    @IBAction func takePhotoButton(_ sender: Any) {
+        
+            let image = sceneView.snapshot()
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        
+    }
     
     @IBOutlet var sceneView: ARSCNView!
-    
+
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        let imageView = UIImageView(image: image)
-        imageView.frame = CGRect(x: 0, y: 0, width: 329, height: 155)
+        let bandeirinhaImageView = UIImageView(image: bandeirinhaImage)
+        bandeirinhaImageView.frame = CGRect(x: 0, y: 0, width: 329, height: 155)
         
-        let fogueirinhaImageView = UIImageView(image: image2)
+        
+        let bandeirinhaImageView2 = UIImageView(image: bandeirinhaImage)
+        bandeirinhaImageView2.frame = CGRect(x: 0, y: 0, width: 329, height: 155)
+        
+        
+        let fogueirinhaImageView = UIImageView(image: fogueirinhaImage)
         fogueirinhaImageView.frame = CGRect(x: 0.03, y: 600, width: 227, height: 191)
         
-        
-        self.view.addSubview(imageView)
+        self.view.addSubview(bandeirinhaImageView)
         self.view.addSubview(fogueirinhaImageView)
         sceneView.delegate = self
-        
         
         guard ARFaceTrackingConfiguration.isSupported
         else {
@@ -53,7 +64,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.pause()
     }
     
-    //Renderizar a região do rosto com os nós
+    var appActive = false {
+        didSet {
+            UIApplication.shared.isIdleTimerDisabled = self.appActive
+        }
+    }
+    
+    //MARK: - Renderizar a região do rosto com os nós
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         if let device = sceneView.device {
             let faceMeshGeometry = ARSCNFaceGeometry(device: device)
@@ -75,11 +92,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    //Renderizando e dando update
+    //MARK: - Dando update
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         if let faceAnchor = anchor as? ARFaceAnchor, let faceGeometry = node.geometry as? ARSCNFaceGeometry {
             faceGeometry.update(from: faceAnchor.geometry)
+
+            
         }
     }
 }
-

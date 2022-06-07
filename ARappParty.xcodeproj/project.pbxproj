@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		06F5BF892849533100C2951F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F5BF882849533100C2951F /* AppDelegate.swift */; };
-		06F5BF8B2849533200C2951F /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 06F5BF8A2849533100C2951F /* art.scnassets */; };
 		06F5BF8D2849533200C2951F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F5BF8C2849533200C2951F /* ViewController.swift */; };
 		06F5BF902849533200C2951F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06F5BF8E2849533200C2951F /* Main.storyboard */; };
 		06F5BF922849533300C2951F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06F5BF912849533300C2951F /* Assets.xcassets */; };
@@ -18,7 +17,6 @@
 /* Begin PBXFileReference section */
 		06F5BF852849533100C2951F /* ARappParty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARappParty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06F5BF882849533100C2951F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		06F5BF8A2849533100C2951F /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		06F5BF8C2849533200C2951F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		06F5BF8F2849533200C2951F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		06F5BF912849533300C2951F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -56,7 +54,6 @@
 			isa = PBXGroup;
 			children = (
 				06F5BF882849533100C2951F /* AppDelegate.swift */,
-				06F5BF8A2849533100C2951F /* art.scnassets */,
 				06F5BF8C2849533200C2951F /* ViewController.swift */,
 				06F5BF8E2849533200C2951F /* Main.storyboard */,
 				06F5BF912849533300C2951F /* Assets.xcassets */,
@@ -123,7 +120,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06F5BF8B2849533200C2951F /* art.scnassets in Resources */,
 				06F5BF952849533300C2951F /* LaunchScreen.storyboard in Resources */,
 				06F5BF922849533300C2951F /* Assets.xcassets in Resources */,
 				06F5BF902849533200C2951F /* Main.storyboard in Resources */,
@@ -288,6 +284,8 @@
 				DEVELOPMENT_TEAM = UZ6JTAUWH8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "photo library additions";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "photo usage please";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -318,6 +316,8 @@
 				DEVELOPMENT_TEAM = UZ6JTAUWH8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "photo library additions";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "photo usage please";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
