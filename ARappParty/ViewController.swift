@@ -17,10 +17,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     
     @IBAction func takePhotoButton(_ sender: Any) {
-        
-            let image = sceneView.snapshot()
-            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-        
+        let image = sceneView.snapshot()
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
     
     @IBOutlet var sceneView: ARSCNView!

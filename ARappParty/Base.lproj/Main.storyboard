@@ -16,26 +16,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BrB-h1-WRS">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                            </arscnView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1RP-mI-1hu">
-                                <rect key="frame" x="174" y="729" width="67" height="31"/>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BrB-h1-WRS">
+                                <rect key="frame" x="0.0" y="14" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </arscnView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lFf-P2-dUD">
+                                <rect key="frame" x="155" y="696" width="104" height="86"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="botão"/>
                                 <connections>
-                                    <action selector="takePhotoButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="6DB-vF-Bez"/>
+                                    <action selector="takePhotoButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="O88-3y-3lQ"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="BrB-h1-WRS" firstAttribute="centerY" secondItem="U0K-SW-4ec" secondAttribute="centerY" id="G2n-yK-HCi"/>
-                            <constraint firstItem="BrB-h1-WRS" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="Sq0-an-Fql"/>
-                            <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" id="pDs-QZ-KC9"/>
-                            <constraint firstItem="BrB-h1-WRS" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="topMargin" constant="-44" id="zbs-0H-4sS"/>
+                            <constraint firstItem="lFf-P2-dUD" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" constant="155" id="2Z6-9O-jTF"/>
+                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="trailing" secondItem="lFf-P2-dUD" secondAttribute="trailing" constant="155" id="Qgn-bU-dQm"/>
+                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="lFf-P2-dUD" secondAttribute="bottom" constant="80" id="n31-m6-CDy"/>
                         </constraints>
                     </view>
                     <connections>
@@ -48,6 +47,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="botão" width="72" height="72"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
