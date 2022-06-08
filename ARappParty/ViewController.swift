@@ -10,15 +10,20 @@ import ARKit
 import SceneKit
 
 class ViewController: UIViewController, ARSCNViewDelegate {
-    let bandeirinhaScenario = "bandeirinha.png"
-    let fogueirinhaScenario = "fogueirinha"
-    let bandeirinhaImage = UIImage(named: "bandeirinha")
-    let fogueirinhaImage = UIImage(named: "fogueirinha")
-    
+
+    @IBOutlet weak var myLabel: UILabel!
     
     @IBAction func takePhotoButton(_ sender: Any) {
         let image = sceneView.snapshot()
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        
+        myLabel.text = "Salvo!"
+        myLabel.backgroundColor = .red
+    
+            myLabel.isHidden = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.myLabel.isHidden = true
+            }
     }
     
     @IBOutlet var sceneView: ARSCNView!
@@ -27,21 +32,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.viewDidLoad()
         
         sceneView.delegate = self
-        
-
-        let bandeirinhaImageView = UIImageView(image: bandeirinhaImage)
-        bandeirinhaImageView.frame = CGRect(x: 0, y: 0, width: 329, height: 155)
-        
-        
-        let bandeirinhaImageView2 = UIImageView(image: bandeirinhaImage)
-        bandeirinhaImageView2.frame = CGRect(x: 0, y: 0, width: 329, height: 155)
-        
-        
-        let fogueirinhaImageView = UIImageView(image: fogueirinhaImage)
-        fogueirinhaImageView.frame = CGRect(x: 0.03, y: 600, width: 227, height: 191)
-        
-        self.view.addSubview(bandeirinhaImageView)
-        self.view.addSubview(fogueirinhaImageView)
         
         guard ARFaceTrackingConfiguration.isSupported
         else {
@@ -72,9 +62,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             node.geometry?.firstMaterial?.transparency = 0.0
             
             
+            node.addChildNode(ambientObjects())
+             
             node.addChildNode(createHat())
+            
+            
             return node
-
+            
         } else {
             fatalError("Nenhum dispositivo encontrado.")
         }
@@ -84,19 +78,45 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         if let faceAnchor = anchor as? ARFaceAnchor, let faceGeometry = node.geometry as? ARSCNFaceGeometry {
             faceGeometry.update(from: faceAnchor.geometry)
-            
         }
     }
     
     func  createHat() -> SCNNode {
-
+        
         //adicionar um node com imagem acima do node ja existe
-        let hat = SCNNode(geometry: SCNPlane(width: 0.2, height: 0.1))
+        let hat = SCNNode(geometry: SCNPlane(width: 0.2,
+                                             height: 0.1))
         hat.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "caipiraHat")
         hat.name = "Chapéu de caipira"
-        hat.position = SCNVector3(x: 0.0, y: 0.13, z: 0.0)
+        hat.position = SCNVector3(x: 0.0,
+                                  y: 0.13,
+                                  z: 0.0)
         
         return hat
         }
     
+    
+    func ambientObjects() -> SCNNode {
+        
+        //Festa junina
+        let bandeirinha = SCNNode(geometry: SCNPlane(width: 0.25,
+                                                     height: 0.15))
+        bandeirinha.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "bandeirinha")
+        bandeirinha.name = "Bandeirinha junina"
+        bandeirinha.position = SCNVector3(x: 0,
+                                          y: 0.13
+                                          , z: 0.13)
+     
+        
+        let fogueirinha = SCNNode(geometry: SCNPlane(width: 0.25,
+                                                     height: 0.15))
+        fogueirinha.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "fogueirinha")
+        fogueirinha.name = "Fogueirinha"
+        fogueirinha.position = SCNVector3(x: 0,
+                                          y: -0.13,
+                                          z: -0.0)
+        
+        return fogueirinha
+        return bandeirinha
+    }
 }
