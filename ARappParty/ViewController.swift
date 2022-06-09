@@ -7,14 +7,18 @@
 
 import UIKit
 import ARKit
-import SceneKit
+//import SceneKit
 
 class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet weak var myLabel: UILabel!
+    let fogueirinhaImage = UIImage(named: "fogueirinha")
+    let bandeirinhaImage = UIImage(named: "bandeirinha")
+
     
     @IBAction func takePhotoButton(_ sender: Any) {
-        let image = sceneView.snapshot()
+//        let image = sceneView.snapshot()
+        let image = self.view.takeScreenshot()
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         
         myLabel.text = "Salvo!"
@@ -32,6 +36,24 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.viewDidLoad()
         
         sceneView.delegate = self
+        
+        let fogueirinhaImageView = UIImageView(image: fogueirinhaImage)
+        fogueirinhaImageView.frame = CGRect(x: 0.03,
+                                            y: 600,
+                                            width: 227/1.5,
+                                            height: 191/1.5)
+        
+        let bandeirinhaImageView = UIImageView(image: bandeirinhaImage)
+        bandeirinhaImageView.frame = CGRect(x: -0.03 ,
+                                            y: -40,
+                                            width: 647/1.5,
+                                            height: 329/1.5)
+
+        
+        
+        
+        view.addSubview(fogueirinhaImageView)
+        view.addSubview(bandeirinhaImageView)
         
         guard ARFaceTrackingConfiguration.isSupported
         else {
@@ -61,11 +83,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             node.geometry?.firstMaterial?.fillMode = .lines
             node.geometry?.firstMaterial?.transparency = 0.0
             
-            
-            node.addChildNode(ambientObjects())
-             
+//            ambientObjects().forEach({node.addChildNode($0)})
             node.addChildNode(createHat())
-            
             
             return node
             
@@ -96,27 +115,52 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     
     
-    func ambientObjects() -> SCNNode {
-        
-        //Festa junina
-        let bandeirinha = SCNNode(geometry: SCNPlane(width: 0.25,
-                                                     height: 0.15))
-        bandeirinha.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "bandeirinha")
-        bandeirinha.name = "Bandeirinha junina"
-        bandeirinha.position = SCNVector3(x: 0,
-                                          y: 0.13
-                                          , z: 0.13)
-     
-        
-        let fogueirinha = SCNNode(geometry: SCNPlane(width: 0.25,
-                                                     height: 0.15))
-        fogueirinha.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "fogueirinha")
-        fogueirinha.name = "Fogueirinha"
-        fogueirinha.position = SCNVector3(x: 0,
-                                          y: -0.13,
-                                          z: -0.0)
-        
-        return fogueirinha
-        return bandeirinha
+//    func ambientObjects() -> [SCNNode] {
+//
+//        //MARK: - Festa junina
+//        let bandeirinha = SCNNode(geometry: SCNPlane(width: 0.25,
+//                                                     height: 0.15))
+//        bandeirinha.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "bandeirinha")
+//        bandeirinha.name = "Bandeirinha junina"
+//        bandeirinha.position = SCNVector3(x: 0.0,
+//                                          y: 0.25,
+//                                          z: 0.0)
+//
+//
+//        let fogueirinha = SKSpriteNode(imageNamed: "fogueirinha")
+////        fogueirinha.frame = CGRect(x: 0, y: 0, width: 0.15, height: 0.15)
+//        fogueirinha.position = CGPoint(x: 0, y: 0)
+//        fogueirinha.size = CGSize(width: 200, height: 200)
+//
+////        sceneView.overlaySKScene = SKScene(size: CGSize(width: 500, height: 500))
+//        sceneView.overlaySKScene?.size = CGSize(width: 500, height: 500)
+//
+//
+//        sceneView.overlaySKScene?.addChild(fogueirinha)
+//
+//        return [bandeirinha]
+//    }
+}
+
+extension UIView {
+
+    func takeScreenshot() -> UIImage {
+
+        // Pega o contexto inicial da cena
+        UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, UIScreen.main.scale)
+
+        // Desenha a view que está inserida nesse contexto
+        drawHierarchy(in: self.bounds, afterScreenUpdates: true)
+
+        // Pega a imagem
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        //Caso a imagem não seja nula, retorna a imagem (image!)
+        if (image != nil)
+        {
+            return image!
+        }
+        return UIImage()
     }
 }
