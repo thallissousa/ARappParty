@@ -17,6 +17,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     //MARK: - Fazendo o botão com ação de tirar foto da tela
     @IBAction func takePhotoButton(_ sender: Any) {
+        let haptickFeedback = UINotificationFeedbackGenerator()
+                haptickFeedback.notificationOccurred(.success)
+        
         let image = self.view.takeScreenshot()
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         
