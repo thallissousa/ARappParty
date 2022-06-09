@@ -11,7 +11,6 @@
         <!--View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
                 <viewController id="BV1-FR-VrT" customClass="ViewController" customModule="ARappParty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U0K-SW-4ec">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -45,6 +44,7 @@
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="115.84821428571428"/>
         </scene>
