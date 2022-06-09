@@ -11,17 +11,27 @@ import ARKit
 class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBOutlet var sceneView: ARSCNView!
-    @IBOutlet weak var myLabel: UILabel!
     let fogueirinhaImage = UIImage(named: "fogueirinha")
     let bandeirinhaImage = UIImage(named: "bandeirinha")
+    let myLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+
     
     //MARK: - Fazendo o botão com ação de tirar foto da tela
     @IBAction func takePhotoButton(_ sender: Any) {
         let image = self.view.takeScreenshot()
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         
+        myLabel.textColor = .systemBackground
+        myLabel.backgroundColor = .darkGray.withAlphaComponent(0.8)
+        myLabel.layer.masksToBounds = true
+        myLabel.layer.cornerRadius = 8
+        myLabel.frame.size = CGSize(width: 70, height: 40)
+        myLabel.center = CGPoint(x: view.center.x, y: view.center.y)
+        myLabel.textAlignment = .center
         myLabel.text = "Salvo!"
         
+        
+        self.view.addSubview(myLabel)
         myLabel.isHidden = false
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.myLabel.isHidden = true
@@ -34,8 +44,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.delegate = self
         
         let fogueirinhaImageView = UIImageView(image: fogueirinhaImage)
-        fogueirinhaImageView.frame = CGRect(x: 0.03,
-                                            y: 600,
+        fogueirinhaImageView.frame = CGRect(x: 7,
+                                            y: 650,
                                             width: 227/1.5,
                                             height: 191/1.5)
         
