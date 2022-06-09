@@ -7,31 +7,27 @@
 
 import UIKit
 import ARKit
-//import SceneKit
 
 class ViewController: UIViewController, ARSCNViewDelegate {
-
+    
+    @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var myLabel: UILabel!
     let fogueirinhaImage = UIImage(named: "fogueirinha")
     let bandeirinhaImage = UIImage(named: "bandeirinha")
-
     
+    //MARK: - Fazendo o botão com ação de tirar foto da tela
     @IBAction func takePhotoButton(_ sender: Any) {
-//        let image = sceneView.snapshot()
         let image = self.view.takeScreenshot()
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         
         myLabel.text = "Salvo!"
-        myLabel.backgroundColor = .red
-    
-            myLabel.isHidden = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.myLabel.isHidden = true
-            }
+        
+        myLabel.isHidden = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.myLabel.isHidden = true
+        }
     }
     
-    @IBOutlet var sceneView: ARSCNView!
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,17 +44,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                                             y: -40,
                                             width: 647/1.5,
                                             height: 329/1.5)
-
-        
-        
-        
-        view.addSubview(fogueirinhaImageView)
-        view.addSubview(bandeirinhaImageView)
         
         guard ARFaceTrackingConfiguration.isSupported
         else {
             fatalError("Dispositivo não suportado.")
         }
+        
+        view.addSubview(fogueirinhaImageView)
+        view.addSubview(bandeirinhaImageView)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,7 +69,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.pause()
     }
     
-    //MARK: - Renderizar a região do rosto com os nós
+    //MARK: - Renderizando a região do rosto com os nós
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         if let device = sceneView.device {
             let faceMeshGeometry = ARSCNFaceGeometry(device: device)
@@ -83,7 +77,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             node.geometry?.firstMaterial?.fillMode = .lines
             node.geometry?.firstMaterial?.transparency = 0.0
             
-//            ambientObjects().forEach({node.addChildNode($0)})
             node.addChildNode(createHat())
             
             return node
@@ -93,15 +86,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    //MARK: - Dando update
+    //MARK: - Dando update na função de renderização da AR
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         if let faceAnchor = anchor as? ARFaceAnchor, let faceGeometry = node.geometry as? ARSCNFaceGeometry {
             faceGeometry.update(from: faceAnchor.geometry)
         }
     }
     
+    //MARK: - Criando um nó com a imagem que será adicionada no AR
     func  createHat() -> SCNNode {
-        
         //adicionar um node com imagem acima do node ja existe
         let hat = SCNNode(geometry: SCNPlane(width: 0.2,
                                              height: 0.1))
@@ -112,50 +105,25 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                                   z: 0.0)
         
         return hat
-        }
-    
-    
-//    func ambientObjects() -> [SCNNode] {
-//
-//        //MARK: - Festa junina
-//        let bandeirinha = SCNNode(geometry: SCNPlane(width: 0.25,
-//                                                     height: 0.15))
-//        bandeirinha.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "bandeirinha")
-//        bandeirinha.name = "Bandeirinha junina"
-//        bandeirinha.position = SCNVector3(x: 0.0,
-//                                          y: 0.25,
-//                                          z: 0.0)
-//
-//
-//        let fogueirinha = SKSpriteNode(imageNamed: "fogueirinha")
-////        fogueirinha.frame = CGRect(x: 0, y: 0, width: 0.15, height: 0.15)
-//        fogueirinha.position = CGPoint(x: 0, y: 0)
-//        fogueirinha.size = CGSize(width: 200, height: 200)
-//
-////        sceneView.overlaySKScene = SKScene(size: CGSize(width: 500, height: 500))
-//        sceneView.overlaySKScene?.size = CGSize(width: 500, height: 500)
-//
-//
-//        sceneView.overlaySKScene?.addChild(fogueirinha)
-//
-//        return [bandeirinha]
-//    }
+        
+    }
 }
 
+//MARK: -  Extension de UIView para colocar as imagens estáticas dentro da cena
 extension UIView {
-
+    
     func takeScreenshot() -> UIImage {
-
+        
         // Pega o contexto inicial da cena
         UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, UIScreen.main.scale)
-
+        
         // Desenha a view que está inserida nesse contexto
         drawHierarchy(in: self.bounds, afterScreenUpdates: true)
-
+        
         // Pega a imagem
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-
+        
         //Caso a imagem não seja nula, retorna a imagem (image!)
         if (image != nil)
         {
