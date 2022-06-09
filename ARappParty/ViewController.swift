@@ -17,8 +17,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let image = sceneView.snapshot()
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         
-        myLabel.text = "Salvo!"
-        myLabel.backgroundColor = .red
+        myLabel.text = "Salvo"
+        myLabel.backgroundColor = UIColor(red: 38/255, green: 38/255 , blue: 38/255, alpha: 1.0)
+        myLabel.textColor = .white
+        myLabel.textAlignment = .center
     
             myLabel.isHidden = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
