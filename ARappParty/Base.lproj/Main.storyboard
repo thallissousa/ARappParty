@@ -16,12 +16,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BrB-h1-WRS">
-                                <rect key="frame" x="0.0" y="14" width="414" height="896"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BrB-h1-WRS">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </arscnView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lFf-P2-dUD">
-                                <rect key="frame" x="155" y="696" width="104" height="86"/>
+                                <rect key="frame" x="155" y="731" width="104" height="86"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="botão"/>
                                 <connections>
@@ -40,8 +39,12 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="lFf-P2-dUD" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" constant="155" id="2Z6-9O-jTF"/>
+                            <constraint firstItem="BrB-h1-WRS" firstAttribute="trailing" secondItem="fQZ-KI-GVf" secondAttribute="trailing" id="A50-4f-GD5"/>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="trailing" secondItem="lFf-P2-dUD" secondAttribute="trailing" constant="155" id="Qgn-bU-dQm"/>
-                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="lFf-P2-dUD" secondAttribute="bottom" constant="80" id="n31-m6-CDy"/>
+                            <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" id="UCj-oK-Ds9"/>
+                            <constraint firstAttribute="bottom" secondItem="BrB-h1-WRS" secondAttribute="bottom" id="czt-HG-6CH"/>
+                            <constraint firstItem="BrB-h1-WRS" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" id="fVy-0h-xie"/>
+                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="lFf-P2-dUD" secondAttribute="bottom" constant="45" id="n31-m6-CDy"/>
                         </constraints>
                     </view>
                     <connections>
