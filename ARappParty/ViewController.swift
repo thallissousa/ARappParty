@@ -17,10 +17,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     let balao = UIImage(named: "balao")
     let myLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
     @IBOutlet weak var howTo: UIButton!
+    @IBOutlet weak var takePhotoButton: UIButton!
     
     
     //MARK: - Fazendo o botão com ação de tirar foto da tela
     @IBAction func takePhotoButton(_ sender: Any) {
+        takePhotoButton.isHidden = true
+        howTo.isHidden = true
         let haptickFeedback = UINotificationFeedbackGenerator()
                 haptickFeedback.notificationOccurred(.success)
         
@@ -41,6 +44,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.myLabel.isHidden = true
         }
+        takePhotoButton.isHidden = false
+        howTo.isHidden = false
     }
     
     override func viewDidLoad() {

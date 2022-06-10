@@ -11,7 +11,7 @@
         <!--Onboarding View Controller-->
         <scene sceneID="9aN-39-0z2">
             <objects>
-                <viewController storyboardIdentifier="onboardingViewController" id="T7c-aY-WPl" customClass="OnboardingViewController" customModule="ARappParty" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="onboardingViewController" id="T7c-aY-WPl" customClass="OnboardingViewController" customModule="festejar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NBx-yZ-Rsm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -74,7 +74,7 @@ faça sua melhor pose</string>
         <!--View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController storyboardIdentifier="viewController" id="BV1-FR-VrT" customClass="ViewController" customModule="ARappParty" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="viewController" id="BV1-FR-VrT" customClass="ViewController" customModule="festejar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U0K-SW-4ec">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -118,6 +118,7 @@ faça sua melhor pose</string>
                     <connections>
                         <outlet property="howTo" destination="XmB-x3-3QV" id="fzf-hX-fOG"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
+                        <outlet property="takePhotoButton" destination="lFf-P2-dUD" id="7FU-FS-B3J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
