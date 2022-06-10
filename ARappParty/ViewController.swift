@@ -16,7 +16,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     let balaozinho = UIImage(named: "balaozinho")
     let balao = UIImage(named: "balao")
     let myLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
-
+    @IBOutlet weak var howTo: UIButton!
+    
     
     //MARK: - Fazendo o botão com ação de tirar foto da tela
     @IBAction func takePhotoButton(_ sender: Any) {
@@ -34,7 +35,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         myLabel.center = CGPoint(x: view.center.x, y: view.center.y)
         myLabel.textAlignment = .center
         myLabel.text = "Salvo!"
-        
         
         self.view.addSubview(myLabel)
         myLabel.isHidden = false
@@ -81,7 +81,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         view.addSubview(bandeirinhaImageView)
         view.addSubview(balaozinhoImageView)
         view.addSubview(balaoImageView)
-        
+        view.addSubview(howTo)
+    }
+    
+    @IBAction func howToButton(_ sender: Any) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "onboardingViewController") as? OnboardingViewController {
+            vc.modalPresentationStyle = .overFullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
