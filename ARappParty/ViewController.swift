@@ -13,8 +13,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet var sceneView: ARSCNView!
     let fogueirinhaImage = UIImage(named: "fogueirinha")
     let bandeirinhaImage = UIImage(named: "bandeirinha")
+    let balaozinho = UIImage(named: "balaozinho")
+    let balao = UIImage(named: "balao")
     let myLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
-
+    @IBOutlet weak var howTo: UIButton!
+    
     
     //MARK: - Fazendo o botão com ação de tirar foto da tela
     @IBAction func takePhotoButton(_ sender: Any) {
@@ -32,7 +35,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         myLabel.center = CGPoint(x: view.center.x, y: view.center.y)
         myLabel.textAlignment = .center
         myLabel.text = "Salvo!"
-        
         
         self.view.addSubview(myLabel)
         myLabel.isHidden = false
@@ -58,6 +60,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                                             width: 647/1.5,
                                             height: 329/1.5)
         
+        let balaozinhoImageView = UIImageView(image: balaozinho)
+        balaozinhoImageView.frame = CGRect(x: view.center.x + 90,
+                                           y: 450,
+                                           width: 38*2,
+                                           height: 77*2)
+        
+        let balaoImageView = UIImageView(image: balao)
+        balaoImageView.frame = CGRect(x: view.center.x - 200,
+                                      y: 20,
+                                      width: 94*1.5,
+                                      height: 115*1.5)
+        
         guard ARFaceTrackingConfiguration.isSupported
         else {
             fatalError("Dispositivo não suportado.")
@@ -65,7 +79,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         view.addSubview(fogueirinhaImageView)
         view.addSubview(bandeirinhaImageView)
-        
+        view.addSubview(balaozinhoImageView)
+        view.addSubview(balaoImageView)
+        view.addSubview(howTo)
+    }
+    
+    @IBAction func howToButton(_ sender: Any) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "onboardingViewController") as? OnboardingViewController {
+            vc.modalPresentationStyle = .overFullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
