@@ -17,7 +17,7 @@
 
 /* Begin PBXFileReference section */
 		06C143E62852B2770033BB64 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
-		06F5BF852849533100C2951F /* ARappParty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARappParty.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		06F5BF852849533100C2951F /* festejar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = festejar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06F5BF882849533100C2951F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		06F5BF8C2849533200C2951F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		06F5BF8F2849533200C2951F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -55,7 +55,7 @@
 		06F5BF862849533100C2951F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				06F5BF852849533100C2951F /* ARappParty.app */,
+				06F5BF852849533100C2951F /* festejar.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -76,9 +76,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		06F5BF842849533100C2951F /* ARappParty */ = {
+		06F5BF842849533100C2951F /* festejar */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 06F5BF982849533300C2951F /* Build configuration list for PBXNativeTarget "ARappParty" */;
+			buildConfigurationList = 06F5BF982849533300C2951F /* Build configuration list for PBXNativeTarget "festejar" */;
 			buildPhases = (
 				06F5BF812849533100C2951F /* Sources */,
 				06F5BF822849533100C2951F /* Frameworks */,
@@ -88,9 +88,9 @@
 			);
 			dependencies = (
 			);
-			name = ARappParty;
+			name = festejar;
 			productName = ARappParty;
-			productReference = 06F5BF852849533100C2951F /* ARappParty.app */;
+			productReference = 06F5BF852849533100C2951F /* festejar.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -108,7 +108,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 06F5BF802849533100C2951F /* Build configuration list for PBXProject "ARappParty" */;
+			buildConfigurationList = 06F5BF802849533100C2951F /* Build configuration list for PBXProject "festejar" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -121,7 +121,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				06F5BF842849533100C2951F /* ARappParty */,
+				06F5BF842849533100C2951F /* festejar */,
 			);
 		};
 /* End PBXProject section */
@@ -353,7 +353,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		06F5BF802849533100C2951F /* Build configuration list for PBXProject "ARappParty" */ = {
+		06F5BF802849533100C2951F /* Build configuration list for PBXProject "festejar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				06F5BF962849533300C2951F /* Debug */,
@@ -362,7 +362,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		06F5BF982849533300C2951F /* Build configuration list for PBXNativeTarget "ARappParty" */ = {
+		06F5BF982849533300C2951F /* Build configuration list for PBXNativeTarget "festejar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				06F5BF992849533300C2951F /* Debug */,
